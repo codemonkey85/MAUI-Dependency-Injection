@@ -11,7 +11,14 @@ public partial class MainPage : ContentPage
     public MainPage(IDeviceOrientationService deviceOrientationService)
     {
         InitializeComponent();
-        orientationLabel.Text = deviceOrientationService.GetOrientation().ToString();
+        try
+        {
+            orientationLabel.Text = deviceOrientationService.GetOrientation().ToString();
+        }
+        catch (NotImplementedException ex) 
+        {
+            orientationLabel.Text = ex.Message;
+        }
     }
 
     private void OnCounterClicked(object sender, EventArgs e)
